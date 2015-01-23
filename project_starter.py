@@ -2,6 +2,7 @@ import os
 import sys
 import re
 import json
+import datetime
 import subprocess
 
 import jinja2
@@ -114,8 +115,19 @@ if __name__ == '__main__':
     print 'Creating main.js ...'
     render_template_to_same_filename('main.js')
 
+    # sublime text project file
+    print 'Creating Sublime Text project file ...'
+    stfn = dir_name + '.sublime-project'
+    with open(stfn, 'w') as f:
+        f.write(render_template('sublime-project'))
+
+    # MIT license
+    print 'Creating LICENSE (MIT) ...'
+    render_template_to_same_filename('LICENSE', year=datetime.date.today().year)
+
+    # TODO: .gitignore (npm_modules, sublime text stuff?)
+    # TODO: README.md
+
     # npm install stuff
     check_call_echo(['npm', 'install', '--save-dev', 'browserify', 'watchify'])
 
-    # TODO: .gitignore (npm_modules, sublime text stuff?)
-    # TODO: sublime text project file
