@@ -13,6 +13,7 @@ PACKAGE_JSON_TMPL = {
     'main': 'main.js',
     'scripts': {
         'build': 'browserify main.js > bundle.js',
+        'watch': 'watchify main.js -o bundle.js -v',
      },
     'author': 'Russel Simmons',
     'license': 'MIT',
@@ -113,5 +114,8 @@ if __name__ == '__main__':
     print 'Creating main.js ...'
     render_template_to_same_filename('main.js')
 
-    # install browserify
-    check_call_echo(['npm', 'install', '--save-dev', 'browserify'])
+    # npm install stuff
+    check_call_echo(['npm', 'install', '--save-dev', 'browserify', 'watchify'])
+
+    # TODO: .gitignore (npm_modules, sublime text stuff?)
+    # TODO: sublime text project file
